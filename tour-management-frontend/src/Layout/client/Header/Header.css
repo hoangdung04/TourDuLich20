@@ -1,0 +1,78 @@
+/* Client Header */
+.client-header {
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  background: #001529 !important;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  margin-right: 32px;
+  flex-shrink: 0;
+}
+
+.logo-icon {
+  font-size: 24px;
+  color: #00b96b !important;
+}
+
+.logo-text {
+  font-size: 20px;
+  color: #ffffff !important;
+  letter-spacing: 0.5px;
+}
+
+.header-menu {
+  flex: 1;
+  background: transparent !important;
+  border-bottom: none !important;
+  line-height: 64px;
+}
+
+.header-menu .ant-menu-item a {
+  color: rgba(255,255,255,0.85) !important;
+}
+
+.header-menu .ant-menu-item-selected a {
+  color: #00b96b !important;
+}
+
+/* Auth area (right side) */
+.header-auth {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.header-login-btn {
+  border-color: #00b96b !important;
+  color: #00b96b !important;
+  font-weight: 600;
+  border-radius: 8px !important;
+  transition: all 0.3s;
+}
+
+.header-login-btn:hover {
+  background: rgba(0, 185, 107, 0.15) !important;
+  border-color: #00d47a !important;
+  color: #00d47a !important;
+  transform: translateY(-1px);
+}
+
+.header-username {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 13px;
+}
+
+.header-user:hover .header-username {
+  color: #00b96b !important;
+}

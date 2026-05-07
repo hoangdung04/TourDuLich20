@@ -1,0 +1,137 @@
+/* ==========================================
+   Trang Đăng nhập / Đăng ký - Client
+   ========================================== */
+
+.client-auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+}
+
+/* Hình tròn trang trí nền */
+.client-auth-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  animation: floatCircle 8s ease-in-out infinite;
+}
+.client-auth-circle--1 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  left: -100px;
+  animation-delay: 0s;
+}
+.client-auth-circle--2 {
+  width: 300px;
+  height: 300px;
+  bottom: -80px;
+  right: -80px;
+  animation-delay: 3s;
+}
+
+@keyframes floatCircle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Card trắng ở giữa */
+.client-auth-card {
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 20px;
+  padding: 40px 36px 32px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  position: relative;
+  z-index: 1;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Logo */
+.client-auth-logo {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.client-auth-logo-icon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  font-size: 28px;
+  color: white;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.client-auth-title {
+  margin: 0 !important;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.client-auth-subtitle {
+  color: #999;
+  font-size: 14px;
+}
+
+/* Input */
+.client-input .ant-input,
+.client-input {
+  border-radius: 10px !important;
+  height: 46px;
+  border-color: #e8e8e8 !important;
+  transition: border-color 0.3s;
+}
+.client-input:focus-within {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15) !important;
+}
+
+.input-icon {
+  color: #667eea;
+}
+
+/* Nút đăng nhập / đăng ký */
+.client-auth-btn {
+  height: 48px !important;
+  border-radius: 12px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  background: linear-gradient(135deg, #667eea, #764ba2) !important;
+  border: none !important;
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.45) !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+.client-auth-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 24px rgba(102, 126, 234, 0.55) !important;
+}
+
+/* Tabs */
+.client-auth-tabs .ant-tabs-tab-btn {
+  font-size: 15px;
+  font-weight: 500;
+}
+.client-auth-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #667eea !important;
+}
+.client-auth-tabs .ant-tabs-ink-bar {
+  background: #667eea !important;
+}
