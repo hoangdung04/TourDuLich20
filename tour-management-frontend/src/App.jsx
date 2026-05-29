@@ -2,6 +2,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { ConfigProvider } from "antd";
 import viVN from "antd/locale/vi_VN";
 import { RenderRouter } from "./routers";
+import AIChat from "./components/AIChat/AIChat";
 import "./index.css";
 
 // Cấu hình theme Ant Design: màu travel xanh lá + font Inter
@@ -39,6 +40,7 @@ function App() {
     <ConfigProvider theme={theme} locale={viVN}>
       <Router>
         <RenderRouter />
+        <AIChat />
       </Router>
     </ConfigProvider>
   );

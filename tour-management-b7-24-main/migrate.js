@@ -5,11 +5,16 @@
 import sequelize from "./config/database.js";
 import Role from "./models/role.model.js";
 import Account from "./models/account.model.js";
+import OtpVerify from "./models/otp.model.js";
+import OrderItem from "./models/order-item.model.js";
 import crypto from "crypto";
 
 const hashPassword = (password) => {
-  return crypto.createHash("md5").update(password).digest("hex");
+  const salt = crypto.randomBytes(16).toString("hex");
+  const hash = crypto.scryptSync(password, salt, 64).toString("hex");
+  return `${salt}:${hash}`;
 };
+
 
 const generateToken = (length = 32) => {
   return crypto.randomBytes(length).toString("hex");
@@ -28,6 +33,14 @@ async function migrate() {
     // Tạo bảng accounts
     await Account.sync({ alter: true });
     console.log("✅ Bảng accounts đã sẵn sàng");
+
+    // Tạo bảng otp_verifications
+    await OtpVerify.sync({ alter: true });
+    console.log("✅ Bảng otp_verifications đã sẵn sàng");
+
+    // Tạo bảng orders_item
+    await OrderItem.sync({ alter: true });
+    console.log("✅ Bảng orders_item đã sẵn sàng");
 
     // Tạo role "Super Admin" nếu chưa có
     const [superAdminRole, createdRole] = await Role.findOrCreate({

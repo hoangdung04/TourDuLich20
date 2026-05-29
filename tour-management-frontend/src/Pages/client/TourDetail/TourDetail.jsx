@@ -7,7 +7,7 @@ import {
 import {
   ShoppingCartOutlined, CalendarOutlined,
   BarcodeOutlined, TeamOutlined, HomeOutlined, AppstoreOutlined,
-  FireOutlined,
+  FireOutlined, EnvironmentOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -25,7 +25,12 @@ const { Title, Text, Paragraph } = Typography;
 function TourDetail() {
   const { slugTour } = useParams();
   const [tourDetail, setTourDetail] = useState(null);
-  const [quantity, setQuantity] = useState(1);
+  const [adults, setAdults] = useState(1);
+  const [children, setChildren] = useState(0);
+  const [toddlers, setToddlers] = useState(0);
+  const [seniors, setSeniors] = useState(0);
+  const [visa, setVisa] = useState(0);
+  const [singleRoom, setSingleRoom] = useState(0);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -44,19 +49,36 @@ function TourDetail() {
     fetchTourDetail();
   }, [slugTour]);
 
+  const priceSpecial = tourDetail ? tourDetail.price_special : 0;
+  const adultsPrice = priceSpecial * adults;
+  const childrenPrice = Math.round(priceSpecial * 0.7) * children; // Giảm 30% giá
+  const toddlersPrice = Math.round(priceSpecial * 0.5) * toddlers;
+  const seniorsPrice = Math.round(priceSpecial * 0.6) * seniors; // Người cao tuổi giảm 40% (tính 60%)
+  const visaPrice = 1500000 * visa;
+  const singleRoomPrice = 3500000 * singleRoom;
+  const totalPrice = adultsPrice + childrenPrice + toddlersPrice + seniorsPrice + visaPrice + singleRoomPrice;
+
   // Thêm vào giỏ hàng (yêu cầu đăng nhập)
   const handleAddToCart = () => {
     if (!isLoggedIn()) {
-      message.warning("Vui lòng đăng nhập để thêm vào giỏ hàng");
+      message.warning("Vui lòng đăng nhập để chọn đặt tour");
       navigate("/login");
       return;
     }
 
-    if (tourDetail && quantity > 0) {
-      addToCart(tourDetail.id, quantity);
+    if (tourDetail && (adults + children + toddlers + seniors) > 0) {
+      addToCart(tourDetail.id, {
+        adultsQuantity: adults,
+        childrenQuantity: children,
+        toddlersQuantity: toddlers,
+        infantsQuantity: 0,
+        seniorsQuantity: seniors,
+        visaQuantity: visa,
+        singleRoomQuantity: singleRoom,
+      });
       window.dispatchEvent(new Event("cartUpdated"));
       message.success({
-        content: `✅ Đã thêm "${tourDetail.title}" vào giỏ hàng!`,
+        content: `✅ Đã chọn đặt tour "${tourDetail.title}" thành công!`,
         duration: 3,
       });
     }
@@ -66,7 +88,7 @@ function TourDetail() {
   if (!tourDetail) return <div style={{ padding: 40 }}>Tour không tồn tại.</div>;
 
   return (
-    <div>
+    <div className="tour-detail-page">
       <Breadcrumb
         style={{ marginBottom: 20 }}
         items={[
@@ -99,11 +121,11 @@ function TourDetail() {
         {/* Right: Tour info */}
         <Col xs={24} md={12}>
           <Space direction="vertical" size={16} style={{ width: "100%" }}>
-            <Title level={3} style={{ margin: 0, color: "#1a1a2e" }}>
+            <Title level={3} className="tour-detail-title">
               {tourDetail.title}
             </Title>
 
-            <Space wrap>
+            <Space wrap className="tour-detail-tags">
               <Tag icon={<BarcodeOutlined />} color="default">
                 Mã tour: {tourDetail.code}
               </Tag>
@@ -117,14 +139,24 @@ function TourDetail() {
               </Tag>
             </Space>
 
-            <Space align="center" size={12}>
-              <CalendarOutlined style={{ color: "#888" }} />
-              <Text type="secondary">
-                Lịch khởi hành: {tourDetail.timeStart
-                  ? new Date(tourDetail.timeStart).toLocaleDateString("vi-VN")
-                  : "Liên hệ"}
-              </Text>
-            </Space>
+            <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+              <Space align="center" size={8} style={{ background: 'rgba(0,185,107,0.06)', padding: '6px 14px', borderRadius: 10 }}>
+                <CalendarOutlined style={{ color: 'var(--primary)', fontSize: 15 }} />
+                <Text style={{ fontSize: 13, color: '#374151' }}>
+                  Khởi hành: <strong>{tourDetail.timeStart
+                    ? new Date(tourDetail.timeStart).toLocaleDateString("vi-VN")
+                    : "Liên hệ"}</strong>
+                </Text>
+              </Space>
+              {tourDetail.destination && (
+                <Space align="center" size={8} style={{ background: 'rgba(255,107,53,0.06)', padding: '6px 14px', borderRadius: 10 }}>
+                  <EnvironmentOutlined style={{ color: 'var(--accent)', fontSize: 15 }} />
+                  <Text style={{ fontSize: 13, color: '#374151' }}>
+                    Điểm đến: <strong>{tourDetail.destination}</strong>
+                  </Text>
+                </Space>
+              )}
+            </div>
 
             <Card className="price-card" bordered={false}>
               <Row gutter={24}>
@@ -146,31 +178,160 @@ function TourDetail() {
                 </Col>
               </Row>
             </Card>
-
-            <Space size={12} align="center">
-              <Text strong>Số lượng:</Text>
-              <InputNumber
-                min={1}
-                max={tourDetail.stock}
-                value={quantity}
-                onChange={(val) => setQuantity(val || 1)}
-                style={{ width: 100 }}
-                size="large"
-              />
-            </Space>
-
-            <Button
-              type="primary"
-              size="large"
-              icon={<ShoppingCartOutlined />}
-              onClick={handleAddToCart}
-              disabled={tourDetail.stock === 0}
-              style={{ height: 48, fontSize: 16, borderRadius: 10 }}
-              block
-            >
-              {tourDetail.stock === 0 ? "Hết chỗ" : "Thêm vào giỏ hàng"}
-            </Button>
           </Space>
+        </Col>
+
+        {/* Cột full-width cho phần chọn hành khách và tổng tiền */}
+        <Col span={24}>
+          <Card title={<span style={{ fontWeight: 700 }}><TeamOutlined /> Chọn hành khách & Dịch vụ</span>} size="small" className="traveler-selector-card">
+            <Row gutter={[16, 16]}>
+              <Col xs={24} sm={12} md={8}>
+                <div className="traveler-row">
+                  <div className="traveler-label">
+                    <Text strong style={{ fontSize: 14, color: "#1f2937" }}>Người lớn</Text>
+                    <span className="traveler-desc">Từ 11 đến dưới 60 tuổi (100% giá)</span>
+                    <span className="traveler-price-tag">{priceSpecial.toLocaleString("vi-VN")}đ</span>
+                  </div>
+                  <InputNumber
+                    min={1}
+                    value={adults}
+                    onChange={(val) => {
+                      const nextVal = val || 1;
+                      if (nextVal + children + toddlers + seniors <= tourDetail.stock) {
+                        setAdults(nextVal);
+                      } else {
+                        message.warning(`Tổng số chỗ vượt quá số lượng còn lại của Tour (${tourDetail.stock} chỗ)`);
+                      }
+                    }}
+                    size="middle"
+                  />
+                </div>
+              </Col>
+
+              <Col xs={24} sm={12} md={8}>
+                <div className="traveler-row">
+                  <div className="traveler-label">
+                    <Text strong style={{ fontSize: 14, color: "#1f2937" }}>Người cao tuổi</Text>
+                    <span className="traveler-desc">Từ 60 tuổi trở lên (Giảm 40% giá)</span>
+                    <span className="traveler-price-tag">{Math.round(priceSpecial * 0.6).toLocaleString("vi-VN")}đ</span>
+                  </div>
+                  <InputNumber
+                    min={0}
+                    value={seniors}
+                    onChange={(val) => {
+                      const nextVal = val || 0;
+                      if (adults + children + toddlers + nextVal <= tourDetail.stock) {
+                        setSeniors(nextVal);
+                      } else {
+                        message.warning(`Tổng số chỗ vượt quá số lượng còn lại của Tour (${tourDetail.stock} chỗ)`);
+                      }
+                    }}
+                    size="middle"
+                  />
+                </div>
+              </Col>
+
+              <Col xs={24} sm={12} md={8}>
+                <div className="traveler-row">
+                  <div className="traveler-label">
+                    <Text strong style={{ fontSize: 14, color: "#1f2937" }}>Trẻ em</Text>
+                    <span className="traveler-desc">Từ 5 đến dưới 11 tuổi (Giảm 30% giá)</span>
+                    <span className="traveler-price-tag">{Math.round(priceSpecial * 0.7).toLocaleString("vi-VN")}đ</span>
+                  </div>
+                  <InputNumber
+                    min={0}
+                    value={children}
+                    onChange={(val) => {
+                      const nextVal = val || 0;
+                      if (adults + nextVal + toddlers + seniors <= tourDetail.stock) {
+                        setChildren(nextVal);
+                      } else {
+                        message.warning(`Tổng số chỗ vượt quá số lượng còn lại của Tour (${tourDetail.stock} chỗ)`);
+                      }
+                    }}
+                    size="middle"
+                  />
+                </div>
+              </Col>
+
+              <Col xs={24} sm={12} md={8}>
+                <div className="traveler-row">
+                  <div className="traveler-label">
+                    <Text strong style={{ fontSize: 14, color: "#1f2937" }}>Trẻ nhỏ</Text>
+                    <span className="traveler-desc">Từ 2 đến dưới 5 tuổi (Giảm 50% giá)</span>
+                    <span className="traveler-price-tag">{Math.round(priceSpecial * 0.5).toLocaleString("vi-VN")}đ</span>
+                  </div>
+                  <InputNumber
+                    min={0}
+                    value={toddlers}
+                    onChange={(val) => {
+                      const nextVal = val || 0;
+                      if (adults + children + nextVal + seniors <= tourDetail.stock) {
+                        setToddlers(nextVal);
+                      } else {
+                        message.warning(`Tổng số chỗ vượt quá số lượng còn lại của Tour (${tourDetail.stock} chỗ)`);
+                      }
+                    }}
+                    size="middle"
+                  />
+                </div>
+              </Col>
+
+              <Col xs={24} sm={12} md={8}>
+                <div className="traveler-row">
+                  <div className="traveler-label">
+                    <Text strong style={{ fontSize: 14, color: "#1f2937" }}>Phụ thu Visa</Text>
+                    <span className="traveler-desc">Hỗ trợ làm visa nhanh</span>
+                    <span className="traveler-price-tag" style={{ color: "#b45309", background: "#fef3c7" }}>1,500,000đ / khách</span>
+                  </div>
+                  <InputNumber
+                    min={0}
+                    max={adults + children + toddlers + seniors}
+                    value={visa}
+                    onChange={(val) => setVisa(val || 0)}
+                    size="middle"
+                  />
+                </div>
+              </Col>
+
+              <Col xs={24} sm={12} md={8}>
+                <div className="traveler-row">
+                  <div className="traveler-label">
+                    <Text strong style={{ fontSize: 14, color: "#1f2937" }}>Phòng đơn</Text>
+                    <span className="traveler-desc">Phụ thu nếu muốn ở phòng riêng</span>
+                    <span className="traveler-price-tag" style={{ color: "#b45309", background: "#fef3c7" }}>3,500,000đ / phòng</span>
+                  </div>
+                  <InputNumber
+                    min={0}
+                    value={singleRoom}
+                    onChange={(val) => setSingleRoom(val || 0)}
+                    size="middle"
+                  />
+                </div>
+              </Col>
+            </Row>
+          </Card>
+
+          <div className="total-preview-card">
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
+              <div>
+                <div className="total-label">Tổng tiền tạm tính</div>
+                <div className="total-price">
+                  {totalPrice.toLocaleString("vi-VN")}đ
+                </div>
+              </div>
+              <Button
+                type="primary"
+                size="large"
+                icon={<ShoppingCartOutlined />}
+                onClick={handleAddToCart}
+                disabled={tourDetail.stock === 0 || (adults + children + toddlers + seniors) === 0}
+                className="btn-add-cart"
+              >
+                {tourDetail.stock === 0 ? "Hết chỗ" : "Chọn đặt Tour này"}
+              </Button>
+            </div>
+          </div>
         </Col>
       </Row>
 

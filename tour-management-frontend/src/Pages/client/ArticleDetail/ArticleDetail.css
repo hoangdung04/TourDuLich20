@@ -1,0 +1,366 @@
+/* Nền trang xám nhạt để làm nổi bật bài viết */
+.article-detail-page {
+  background-color: #f8fafc;
+  min-height: 100vh;
+  padding: 24px 16px 60px; /* Giảm khoảng cách từ viền màn hình xuống */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #334155;
+}
+
+.article-detail-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+/* Thẻ Paper (Trang giấy trắng chứa bài viết) */
+.article-detail-container {
+  max-width: 860px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 32px 48px; /* Giảm khoảng cách (padding) trên dưới của trang giấy */
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0,0,0,0.02);
+}
+
+@media (max-width: 768px) {
+  .article-detail-container {
+    padding: 24px 20px;
+  }
+}
+
+/* === BACK LINK === */
+.article-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 24px; /* Giảm khoảng cách dưới nút Quay lại */
+  transition: all 0.2s;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+
+.article-back-link:hover {
+  color: var(--primary, #00b96b);
+  background: #ffffff;
+  border-color: var(--primary, #00b96b);
+  box-shadow: 0 4px 12px rgba(0, 185, 107, 0.1);
+  transform: translateX(-4px);
+}
+
+/* === HEADER === */
+.article-detail-header {
+  margin-bottom: 24px; /* Giảm khoảng cách dưới Tiêu đề bài viết */
+}
+
+.article-detail-tags {
+  margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.article-detail-tags .ant-tag {
+  border: none;
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-weight: 600;
+  font-size: 12px;
+  background-color: #e0f2fe;
+  color: #0369a1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.article-detail-title {
+  font-size: 42px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.25;
+  margin: 0 0 20px;
+  letter-spacing: -0.03em;
+}
+
+@media (max-width: 768px) {
+  .article-detail-title {
+    font-size: 32px;
+  }
+}
+
+.article-detail-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #94a3b8;
+  font-weight: 500;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* === THUMBNAIL === */
+.article-detail-thumbnail {
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.article-detail-thumbnail img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 500px;
+  object-fit: cover;
+}
+
+/* === SUMMARY BOX === */
+.article-detail-summary {
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+  border-left: 4px solid var(--primary, #00b96b);
+  padding: 24px 32px;
+  border-radius: 0 16px 16px 0;
+  margin-bottom: 40px;
+}
+
+.article-detail-summary p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #065f46;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* === CONTENT TYPOGRAPHY (RICH TEXT) === */
+.article-detail-content {
+  font-size: 16px; /* Kích thước chuẩn dễ đọc */
+  line-height: 1.6;
+  color: #334155;
+  margin-bottom: 40px;
+}
+
+/* Loại bỏ padding mặc định cứng đầu của thư viện Quill */
+.article-detail-content.ql-editor {
+  padding: 0;
+}
+
+.article-detail-content p {
+  margin-top: 0;
+  margin-bottom: 16px; /* Thu hẹp khoảng cách giữa các đoạn */
+}
+
+/* Ẩn các đoạn văn trống hoặc chỉ chứa dấu xuống dòng vô hình (<br>) do editor tự sinh ra */
+.article-detail-content p:empty,
+.article-detail-content p:has(br:only-child) {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Thu hẹp khoảng cách nếu người dùng dùng nút "Thụt lề" (Indent) thay vì dùng "Danh sách" */
+.article-detail-content p[class^="ql-indent-"] {
+  margin-top: 0 !important;
+  margin-bottom: 6px !important;
+}
+
+.article-detail-content h1,
+.article-detail-content h2,
+.article-detail-content h3 {
+  color: #0f172a;
+  font-weight: 700;
+  margin-top: 28px; /* Giảm khoảng cách phía trên tiêu đề */
+  margin-bottom: 12px; /* Giảm khoảng cách phía dưới tiêu đề */
+  line-height: 1.3;
+}
+
+.article-detail-content h2 { font-size: 24px; }
+.article-detail-content h3 { font-size: 20px; }
+
+.article-detail-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 24px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* === Lists & Spacing Fixes === */
+.article-detail-content ul {
+  padding-left: 28px !important;
+  margin-top: 0;
+  margin-bottom: 16px;
+  list-style-type: disc !important; /* Ép hiển thị dấu chấm tròn */
+}
+
+.article-detail-content ol {
+  padding-left: 28px !important;
+  margin-top: 0;
+  margin-bottom: 16px;
+  list-style-type: decimal !important; /* Ép hiển thị số thứ tự */
+}
+
+.article-detail-content li {
+  margin-bottom: 8px;
+  padding-left: 4px;
+}
+
+/* Triệt tiêu margin của thẻ p nếu nó nằm ngầm trong danh sách */
+.article-detail-content li p {
+  margin: 0 !important;
+  display: inline;
+}
+
+.article-detail-content li:last-child {
+  margin-bottom: 0;
+}
+
+/* Custom Blockquote */
+.article-detail-content blockquote {
+  border-left: 4px solid var(--primary, #00b96b);
+  padding: 12px 20px;
+  margin: 24px 0;
+  background: #f0fdf4;
+  border-radius: 0 8px 8px 0;
+  color: #166534;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* === RELATED TOURS (PREMIUM) === */
+.article-related-tours {
+  background: #f8fafc;
+  margin: 60px -56px -48px -56px; /* Kéo tràn ra ngoài padding của container */
+  padding: 48px 56px;
+  border-radius: 0 0 24px 24px;
+  border-top: 1px solid #e2e8f0;
+}
+
+@media (max-width: 768px) {
+  .article-related-tours {
+    margin: 40px -24px -32px -24px;
+    padding: 32px 24px;
+  }
+}
+
+.related-tours-title {
+  font-size: 24px !important;
+  font-weight: 800 !important;
+  color: #0f172a !important;
+  margin-bottom: 32px !important;
+  text-align: center;
+}
+
+.related-tours-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .related-tours-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .related-tours-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.related-tour-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.related-tour-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 185, 107, 0.3);
+}
+
+.related-tour-image {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.related-tour-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.related-tour-card:hover .related-tour-image img {
+  transform: scale(1.08);
+}
+
+.related-tour-discount {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #ff4d4f;
+  color: #ffffff;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(255, 77, 79, 0.3);
+}
+
+.related-tour-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.related-tour-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 16px !important;
+  line-height: 1.5;
+  height: 48px;
+}
+
+.related-tour-price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  flex-wrap: wrap;
+}
+
+.related-tour-price .ant-typography-delete {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.related-tour-price strong {
+  color: #ef4444;
+  font-size: 18px;
+  font-weight: 800;
+}

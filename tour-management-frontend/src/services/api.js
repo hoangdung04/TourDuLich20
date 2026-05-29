@@ -2,7 +2,10 @@
 // API Service - Gọi API từ backend (port 3001)
 // ===================================================
 import axios from 'axios';
-import { getToken, clearAuth } from '../utils/auth';
+import {
+  getToken,
+  clearAuth
+} from '../utils/auth';
 
 // Config axios - baseURL trỏ tới backend
 const api = axios.create({
@@ -46,18 +49,35 @@ api.interceptors.response.use(
 export const getCategories = () => api.get('/categories');
 export const getToursByCategory = (slugCategory) => api.get(`/tours/${slugCategory}`);
 export const getTourDetail = (slugTour) => api.get(`/tours/detail/${slugTour}`);
+export const getFeaturedTours = () => api.get('/tours/featured');
+export const searchTours = (keyword) => api.get(`/tours/search?keyword=${encodeURIComponent(keyword)}`);
+export const getToursByCategories = () => api.get('/tours/by-categories');
 export const getCartList = (cart) => api.post('/cart/list', cart);
 export const createOrder = (data) => api.post('/order', data);
 export const getClientOrderHistory = () => api.get('/order/history');
-export const getOrderSuccess = (orderCode) => api.get(`/order/success?orderCode=${orderCode}`);
+export const getOrderSuccess = (orderCode, payosParams = {}) => {
+  const params = new URLSearchParams({ orderCode });
+  if (payosParams.status) params.append("status", payosParams.status);
+  if (payosParams.code) params.append("code", payosParams.code);
+  if (payosParams.cancel) params.append("cancel", payosParams.cancel);
+  return api.get(`/order/success?${params.toString()}`);
+};
+export const cancelClientOrder = (id) => api.patch(`/order/${id}/cancel`);
+export const getPaymentLink = (id) => api.post(`/order/${id}/payment-link`);
+export const sendAiChatMessage = (message) => api.post('/ai-chat', { message });
 
 // ========================
 // CLIENT AUTH APIs (Người dùng thường)
 // ========================
 
 export const clientRegister = (data) => api.post('/auth/register', data);
+export const clientVerifyOtpRegister = (data) => api.post('/auth/register/verify', data);
 export const clientLogin = (data) => api.post('/auth/login', data);
 export const clientLogout = () => api.post('/auth/logout');
+export const clientChangePassword = (data) => api.post('/auth/change-password', data);
+export const clientForgotPassword = (data) => api.post('/auth/password/forgot', data);
+export const clientResetPassword = (data) => api.post('/auth/password/reset', data);
+export const clientResendOtp = (data) => api.post('/auth/otp/resend', data);
 
 // ========================
 // ADMIN AUTH APIs
@@ -71,14 +91,20 @@ export const adminMe = () => api.get('/admin/auth/me');
 // ADMIN TOURS APIs
 // ========================
 
-export const getAdminTours = (params) => api.get('/admin/tours', { params });
+export const getAdminTours = (params) => api.get('/admin/tours', {
+  params
+});
 export const getAdminTourCategories = () => api.get('/admin/tours/categories');
 export const createAdminTour = (formData) => api.post('/admin/tours/create', formData, {
-  headers: { 'Content-Type': 'multipart/form-data' }
+  headers: {
+    'Content-Type': 'multipart/form-data'
+  }
 });
 export const getAdminTourById = (id) => api.get(`/admin/tours/${id}`);
 export const updateAdminTour = (id, formData) => api.patch(`/admin/tours/${id}`, formData, {
-  headers: { 'Content-Type': 'multipart/form-data' }
+  headers: {
+    'Content-Type': 'multipart/form-data'
+  }
 });
 export const deleteAdminTour = (id) => api.delete(`/admin/tours/${id}`);
 
@@ -89,10 +115,14 @@ export const deleteAdminTour = (id) => api.delete(`/admin/tours/${id}`);
 export const getAdminCategories = () => api.get('/admin/categories');
 export const getAdminCategoryById = (id) => api.get(`/admin/categories/${id}`);
 export const createAdminCategory = (formData) => api.post('/admin/categories/create', formData, {
-  headers: { 'Content-Type': 'multipart/form-data' }
+  headers: {
+    'Content-Type': 'multipart/form-data'
+  }
 });
 export const updateAdminCategory = (id, formData) => api.patch(`/admin/categories/${id}`, formData, {
-  headers: { 'Content-Type': 'multipart/form-data' }
+  headers: {
+    'Content-Type': 'multipart/form-data'
+  }
 });
 export const deleteAdminCategory = (id) => api.delete(`/admin/categories/${id}`);
 
@@ -123,12 +153,38 @@ export const deleteAdminAccount = (id) => api.delete(`/admin/accounts/${id}`);
 // ========================
 
 export const getAdminOrders = () => api.get('/admin/orders');
-export const updateAdminOrderStatus = (id, status) => api.patch(`/admin/orders/${id}/status`, { status });
+export const getAdminOrderById = (id) => api.get(`/admin/orders/${id}`);
+export const updateAdminOrderStatus = (id, status) => api.patch(`/admin/orders/${id}/status`, {
+  status
+});
+export const deleteAdminOrder = (id) => api.delete(`/admin/orders/${id}`);
 
 // ========================
 // ADMIN DASHBOARD APIs
 // ========================
 
 export const getAdminDashboard = () => api.get('/admin/dashboard');
+
+// ========================
+// CLIENT ARTICLES APIs
+// ========================
+
+export const getArticles = (params) => api.get('/articles', { params });
+export const getArticleDetail = (slug) => api.get(`/articles/${slug}`);
+
+// ========================
+// ADMIN ARTICLES APIs
+// ========================
+
+export const getAdminArticles = (params) => api.get('/admin/articles', { params });
+export const getAdminArticleById = (id) => api.get(`/admin/articles/${id}`);
+export const getAdminArticleTours = () => api.get('/admin/articles/tours');
+export const createAdminArticle = (formData) => api.post('/admin/articles/create', formData, {
+  headers: { 'Content-Type': 'multipart/form-data' }
+});
+export const updateAdminArticle = (id, formData) => api.patch(`/admin/articles/${id}`, formData, {
+  headers: { 'Content-Type': 'multipart/form-data' }
+});
+export const deleteAdminArticle = (id) => api.delete(`/admin/articles/${id}`);
 
 export default api;

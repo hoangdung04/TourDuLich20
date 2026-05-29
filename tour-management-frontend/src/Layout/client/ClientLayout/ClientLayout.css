@@ -1,10 +1,13 @@
-/* Client layout content area */
+/* ==========================================
+   CLIENT LAYOUT — Content wrapper
+========================================== */
 .client-content {
-  background: #f5f6fa;
+  min-height: calc(100vh - 72px - 200px);
+  background: var(--bg);
 }
 
 .client-content-inner {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 32px 24px;
+  padding: 32px 24px 48px;
 }

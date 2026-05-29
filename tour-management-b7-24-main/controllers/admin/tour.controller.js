@@ -2,18 +2,45 @@ import Tour from "../../models/tour.model.js";
 import Category from "../../models/category.model.js";
 import TourCategory from "../../models/tour-category.model.js";
 import { generateTourCode } from "../../helpers/generate.helper.js";
+import { Op } from "sequelize";
+import sequelize from "../../config/database.js";
+import { QueryTypes } from "sequelize";
 
 export const index = async (req, res, next) => {
   try {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
+    const page   = parseInt(req.query.page)  || 1;
+    const limit  = parseInt(req.query.limit) || 10;
     const offset = (page - 1) * limit;
 
-    const { count, rows: tours } = await Tour.findAndCountAll({ 
-      where: { deleted: false }, 
-      offset: offset,
-      limit: limit,
-      raw: true 
+    // --- Build WHERE clause cho Tour ---
+    const where = { deleted: false };
+
+    // Tìm kiếm theo tiêu đề
+    if (req.query.search && req.query.search.trim() !== "") {
+      where.title = { [Op.like]: `%${req.query.search.trim()}%` };
+    }
+
+    // Lọc theo trạng thái
+    if (req.query.status && req.query.status !== "") {
+      where.status = req.query.status;
+    }
+
+    // Lọc theo danh mục: cần subquery lấy tour_id từ tours_categories
+    if (req.query.category_id && req.query.category_id !== "") {
+      const catId = parseInt(req.query.category_id);
+      const tourIds = await TourCategory.findAll({
+        where:      { category_id: catId },
+        attributes: ['tour_id'],
+        raw:        true,
+      });
+      where.id = { [Op.in]: tourIds.map(t => t.tour_id) };
+    }
+
+    const { count, rows: tours } = await Tour.findAndCountAll({
+      where,
+      offset,
+      limit,
+      raw: true,
     });
 
     tours.forEach(item => {
@@ -26,12 +53,12 @@ export const index = async (req, res, next) => {
     
     res.json({ 
       tours, 
-      totalPages: Math.ceil(count / limit), 
+      totalPages:  Math.ceil(count / limit), 
       currentPage: page,
-      totalItems: count
+      totalItems:  count,
     });
   } catch (error) {
-    next(error); // Chuyển lỗi cho Global Error Handler
+    next(error);
   }
 };
 

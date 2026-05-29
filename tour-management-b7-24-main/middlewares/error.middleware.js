@@ -15,6 +15,8 @@ export const errorHandler = (err, req, res, next) => {
     code: "error",
     message: message,
     // Chỉ hiển thị stack trace nếu không phải production
-    ...(process.env.NODE_ENV !== "production" && { stack: err.stack }),
+    ...(process.env.NODE_ENV !== "production" && {
+      stack: err.stack
+    }),
   });
 };

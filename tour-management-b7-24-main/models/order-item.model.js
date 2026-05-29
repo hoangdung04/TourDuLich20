@@ -31,6 +31,34 @@ const OrderItem = sequelize.define("OrderItem", {
     type: DataTypes.DATE,
     allowNull: false,
   },
+  adultsQuantity: {
+    type: DataTypes.INTEGER,
+    defaultValue: 1,
+  },
+  childrenQuantity: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
+  toddlersQuantity: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
+  infantsQuantity: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
+  visaQuantity: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
+  singleRoomQuantity: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
+  seniorsQuantity: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
 }, {
   tableName: 'orders_item',
   timestamps: false,

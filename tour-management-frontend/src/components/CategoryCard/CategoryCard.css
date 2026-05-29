@@ -1,49 +1,102 @@
-/* CategoryCard */
+/* ==========================================
+   CATEGORY CARD — Full-image overlay style
+========================================== */
 .category-card {
-  border-radius: 12px !important;
+  border-radius: var(--radius-md);
   overflow: hidden;
-  transition: transform 0.25s, box-shadow 0.25s !important;
+  cursor: pointer;
+  position: relative;
+  height: 220px;
+  border: none;
+  background: #111;
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s;
+  display: block;
 }
 
 .category-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.14) !important;
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.22);
 }
 
+/* Background image — fills entire card */
 .category-card-img-wrapper {
-  position: relative;
-  height: 200px;
-  overflow: hidden;
+  position: absolute;
+  inset: 0;
 }
 
 .category-card-img {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
-  transition: transform 0.35s;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
 }
+.category-card:hover .category-card-img { transform: scale(1.1); }
 
-.category-card:hover .category-card-img {
-  transform: scale(1.06);
-}
-
+/* Dark gradient over image */
 .category-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.45), transparent);
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  padding: 12px;
-  opacity: 0;
-  transition: opacity 0.25s;
+  background: linear-gradient(
+    to top,
+    rgba(10,20,20,0.82) 0%,
+    rgba(10,20,20,0.3) 60%,
+    rgba(10,20,20,0.05) 100%
+  );
+  transition: background 0.35s;
 }
-
 .category-card:hover .category-card-overlay {
-  opacity: 1;
+  background: linear-gradient(
+    to top,
+    rgba(0,150,84,0.78) 0%,
+    rgba(0,150,84,0.2) 55%,
+    transparent 100%
+  );
 }
 
-.overlay-icon {
-  font-size: 24px;
-  color: #ffffff;
+/* Text content on top of image */
+.category-card-content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 18px 18px 16px;
+  z-index: 2;
+}
+
+.category-card-title {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  margin-bottom: 4px !important;
+  line-height: 1.3 !important;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+.category-card-desc {
+  font-size: 13px !important;
+  color: rgba(255,255,255,0.8) !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Hover arrow icon */
+.category-card-arrow {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.3s, transform 0.3s;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+.category-card:hover .category-card-arrow {
+  opacity: 1;
+  transform: translateX(0);
 }

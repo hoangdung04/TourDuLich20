@@ -30,6 +30,10 @@ const Order = sequelize.define("Order", {
   status: {
     type: DataTypes.STRING(20),
   },
+  paymentMethod: {
+    type: DataTypes.STRING(20),
+    defaultValue: "cash",
+  },
   deleted: {
     type: DataTypes.BOOLEAN,
     defaultValue: false, // Đặt giá trị mặc định là false

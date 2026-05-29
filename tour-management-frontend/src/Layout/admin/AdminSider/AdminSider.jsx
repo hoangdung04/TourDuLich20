@@ -10,6 +10,10 @@ import {
   UserSwitchOutlined,
   ShoppingCartOutlined,
   DashboardOutlined,
+  MessageOutlined,
+  ReadOutlined,
+  FileTextOutlined,
+  PlusOutlined,
 } from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
 import "./AdminSider.css";
@@ -29,6 +33,9 @@ function AdminSider() {
     if (location.pathname.startsWith("/admin/roles/permissions")) return "roles-permissions";
     if (location.pathname.startsWith("/admin/roles")) return "roles";
     if (location.pathname.startsWith("/admin/accounts")) return "accounts";
+    if (location.pathname.startsWith("/admin/chat")) return "chat";
+    if (location.pathname.startsWith("/admin/articles/create")) return "articles-create";
+    if (location.pathname.startsWith("/admin/articles")) return "articles";
     return "tours";
   };
 
@@ -80,6 +87,28 @@ function AdminSider() {
       ],
     },
     {
+      key: "chat",
+      icon: <MessageOutlined />,
+      label: <Link to="/admin/chat">Chat Hỗ trợ</Link>,
+    },
+    {
+      key: "article-group",
+      icon: <ReadOutlined />,
+      label: "Bài viết",
+      children: [
+        {
+          key: "articles",
+          icon: <FileTextOutlined />,
+          label: <Link to="/admin/articles">Danh sách bài viết</Link>,
+        },
+        {
+          key: "articles-create",
+          icon: <PlusOutlined />,
+          label: <Link to="/admin/articles/create">Thêm bài viết</Link>,
+        },
+      ],
+    },
+    {
       type: "divider",
     },
     {
@@ -118,7 +147,7 @@ function AdminSider() {
         theme="dark"
         mode="inline"
         selectedKeys={[getSelectedKey()]}
-        defaultOpenKeys={["tour-group", "orders-group", "category-group", "system-group"]}
+        defaultOpenKeys={["tour-group", "orders-group", "category-group", "article-group", "system-group"]}
         items={menuItems}
         className="admin-menu"
       />

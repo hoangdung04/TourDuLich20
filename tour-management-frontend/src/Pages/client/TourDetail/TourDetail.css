@@ -1,17 +1,581 @@
-/* TourDetail page */
+/* ==========================================
+   TOUR DETAIL PAGE — Premium Travel Detail
+   Elevated design with micro-animations,
+   glassmorphism, and refined spacing
+========================================== */
+
+/* ── Entrance animation ── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 185, 107, 0.25); }
+  50%      { box-shadow: 0 0 0 8px rgba(0, 185, 107, 0); }
+}
+
+/* ── Page-level wrapper ── */
+.tour-detail-page {
+  animation: fadeIn 0.5s ease;
+}
+
+/* ── Breadcrumb polish ── */
+.tour-detail-page .ant-breadcrumb {
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 185, 107, 0.08);
+  display: inline-flex;
+  margin-bottom: 28px !important;
+}
+
+/* ── Image Gallery (Swiper) ── */
+.swiper-images-main {
+  border-radius: 20px !important;
+  overflow: hidden;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.06) !important;
+  animation: fadeSlideUp 0.6s ease both;
+}
+
+.swiper-images-main .inner-image {
+  aspect-ratio: 4/3;
+  position: relative;
+  overflow: hidden;
+}
+
+.swiper-images-main .inner-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.swiper-images-main .inner-image:hover img {
+  transform: scale(1.04);
+}
+
+/* Swiper navigation */
+.swiper-images-main .swiper-button-next,
+.swiper-images-main .swiper-button-prev {
+  color: #fff !important;
+  background: rgba(15, 25, 35, 0.55) !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  transition: all 0.25s ease !important;
+}
+
+.swiper-images-main .swiper-button-next:hover,
+.swiper-images-main .swiper-button-prev:hover {
+  background: rgba(0, 185, 107, 0.75) !important;
+  transform: scale(1.08);
+}
+
+.swiper-images-main .swiper-button-next::after,
+.swiper-images-main .swiper-button-prev::after {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+}
+
+/* Swiper pagination bullets */
+.swiper-images-main .swiper-pagination-bullet {
+  width: 10px !important;
+  height: 10px !important;
+  background: rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.swiper-images-main .swiper-pagination-bullet-active {
+  background: #00b96b !important;
+  width: 28px !important;
+  border-radius: 6px !important;
+  border-color: #00b96b !important;
+}
+
+/* ── Tour Title ── */
+.tour-detail-title {
+  font-size: 26px !important;
+  font-weight: 800 !important;
+  color: var(--dark) !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.4px;
+  animation: fadeSlideUp 0.5s ease 0.1s both;
+}
+
+/* ── Tag Bar ── */
+.tour-detail-tags {
+  animation: fadeSlideUp 0.5s ease 0.15s both;
+}
+
+.tour-detail-tags .ant-tag {
+  padding: 5px 14px !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  border-radius: 20px !important;
+  letter-spacing: 0.2px;
+  transition: all 0.2s ease !important;
+  border: none !important;
+}
+
+.tour-detail-tags .ant-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Price Card ── */
 .price-card {
-  background: linear-gradient(135deg, #f6ffed, #f0fff4) !important;
-  border-radius: 12px !important;
-  border: 1px solid #b7eb8f !important;
+  background: linear-gradient(135deg, #e8faf0 0%, #d4f5e4 50%, #e8faf0 100%) !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(0, 185, 107, 0.15) !important;
+  box-shadow:
+    0 4px 16px rgba(0, 185, 107, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+  animation: fadeSlideUp 0.5s ease 0.2s both;
+  position: relative;
+  overflow: hidden;
 }
 
+.price-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(0, 185, 107, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.price-card .ant-statistic-title {
+  color: #059669 !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.price-card .ant-statistic-content {
+  color: #059669 !important;
+}
+
+/* ── Traveler Selector Card ── */
+.traveler-selector-card {
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  border-radius: 20px !important;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.04),
+    0 2px 8px rgba(0, 0, 0, 0.02) !important;
+  overflow: hidden;
+  background: #ffffff !important;
+  animation: fadeSlideUp 0.6s ease 0.3s both;
+}
+
+.traveler-selector-card .ant-card-head {
+  background: linear-gradient(135deg, #f8faf9 0%, #f0f4f2 100%) !important;
+  border-bottom: 1px solid rgba(0, 185, 107, 0.1) !important;
+  padding: 16px 24px !important;
+}
+
+.traveler-selector-card .ant-card-head-title {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #1f2937 !important;
+  letter-spacing: -0.2px;
+}
+
+.traveler-selector-card .ant-card-body {
+  padding: 20px !important;
+  background: #ffffff !important;
+}
+
+/* ── Traveler Row (Grid Item) ── */
+.traveler-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px !important;
+  background: linear-gradient(135deg, #fafbfc 0%, #f5f7f6 100%);
+  border: 1.5px solid #eef1f0;
+  border-radius: 14px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.traveler-row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+  border-radius: 3px 0 0 3px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.traveler-row:hover {
+  background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+  border-color: rgba(0, 185, 107, 0.35);
+  box-shadow:
+    0 8px 24px rgba(0, 185, 107, 0.08),
+    0 2px 8px rgba(0, 185, 107, 0.04);
+  transform: translateY(-2px);
+}
+
+.traveler-row:hover::before {
+  opacity: 1;
+}
+
+/* ── Traveler Label ── */
+.traveler-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.traveler-label .ant-typography {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+  letter-spacing: -0.1px;
+}
+
+.traveler-desc {
+  font-size: 11.5px;
+  color: #6b7280;
+  line-height: 1.3;
+  letter-spacing: 0.1px;
+}
+
+.traveler-price-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #059669;
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  padding: 3px 10px;
+  border-radius: 8px;
+  width: fit-content;
+  letter-spacing: 0.2px;
+  border: 1px solid rgba(5, 150, 105, 0.12);
+  transition: all 0.2s ease;
+}
+
+.traveler-row:hover .traveler-price-tag {
+  background: linear-gradient(135deg, #bbf7d0 0%, #86efac 100%);
+  transform: scale(1.02);
+}
+
+/* ── InputNumber Stepper ── */
+.traveler-row .ant-input-number {
+  border-radius: 10px !important;
+  border: 1.5px solid #d1d5db !important;
+  width: 88px !important;
+  height: 38px !important;
+  display: flex !important;
+  align-items: center !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.25s ease !important;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.traveler-row .ant-input-number:hover {
+  border-color: var(--primary) !important;
+  box-shadow: 0 2px 8px rgba(0, 185, 107, 0.12) !important;
+}
+
+.traveler-row .ant-input-number:focus-within,
+.traveler-row .ant-input-number-focused {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(0, 185, 107, 0.1) !important;
+}
+
+.traveler-row .ant-input-number-input {
+  height: 36px !important;
+  text-align: center !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  color: #111827 !important;
+}
+
+.traveler-row .ant-input-number-handler-wrap {
+  border-radius: 0 10px 10px 0 !important;
+  border-left: 1px solid #e5e7eb !important;
+}
+
+.traveler-row .ant-input-number-handler {
+  border-color: #e5e7eb !important;
+}
+
+.traveler-row .ant-input-number-handler:hover {
+  background: var(--primary-light) !important;
+  color: var(--primary) !important;
+}
+
+/* ── Total Preview Card ── */
+.total-preview-card {
+  background: linear-gradient(135deg, #00b96b 0%, #00945a 40%, #007a4a 100%) !important;
+  border-radius: 18px !important;
+  box-shadow:
+    0 16px 48px rgba(0, 185, 107, 0.25),
+    0 4px 12px rgba(0, 185, 107, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  padding: 22px 28px !important;
+  margin-top: 20px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeSlideUp 0.6s ease 0.35s both;
+}
+
+.total-preview-card::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -10%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.total-preview-card::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.total-preview-card .total-label {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 600;
+}
+
+.total-preview-card .total-price {
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-top: 4px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  letter-spacing: -0.5px;
+}
+
+.total-preview-card .btn-add-cart {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #059669 !important;
+  font-weight: 700 !important;
+  font-size: 14.5px !important;
+  border-radius: 14px !important;
+  height: 50px !important;
+  padding: 0 28px !important;
+  border: none !important;
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.1),
+    0 2px 6px rgba(0, 0, 0, 0.06) !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  position: relative;
+  z-index: 1;
+}
+
+.total-preview-card .btn-add-cart:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  color: #047857 !important;
+  background: #ffffff !important;
+}
+
+.total-preview-card .btn-add-cart:active {
+  transform: translateY(-1px) scale(0.99) !important;
+}
+
+.total-preview-card .btn-add-cart:disabled {
+  background: rgba(255, 255, 255, 0.35) !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* ── Info Cards (Tour info / Schedule) ── */
 .info-card {
-  border-radius: 12px !important;
-  background: #fff !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+  border-radius: 20px !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.04),
+    0 2px 8px rgba(0, 0, 0, 0.02) !important;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: fadeSlideUp 0.6s ease 0.4s both;
 }
 
-/* Override Swiper inside TourDetail */
-.tour-detail-page .inner-image {
-  height: 380px;
+.info-card:hover {
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.06),
+    0 4px 12px rgba(0, 0, 0, 0.03) !important;
+}
+
+.info-card .ant-card-head {
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f0fdf4 100%) !important;
+  border-bottom: 1px solid rgba(0, 185, 107, 0.1) !important;
+  padding: 18px 24px !important;
+}
+
+.info-card .ant-card-head-title {
+  font-weight: 700 !important;
+}
+
+.info-card .ant-card-body {
+  padding: 28px !important;
+}
+
+/* ── Rich HTML Content ── */
+.rich-content {
+  line-height: 1.85;
+  color: var(--text-primary);
+  font-size: 15px;
+}
+
+.rich-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  margin: 12px 0;
+}
+
+.rich-content h2,
+.rich-content h3 {
+  color: var(--dark);
+  font-weight: 700;
+  margin-top: 24px;
+}
+
+.rich-content ul {
+  padding-left: 20px;
+}
+
+.rich-content p {
+  margin-bottom: 12px;
+}
+
+/* ── Custom Divider ── */
+.tour-detail-page .ant-divider {
+  border-color: rgba(0, 185, 107, 0.1) !important;
+  margin: 40px 0 !important;
+}
+
+/* ── Calendar / Schedule text ── */
+.tour-detail-page .anticon-calendar {
+  color: var(--primary) !important;
+  font-size: 16px;
+}
+
+/* ── Generic button fallback ── */
+.btn-add-cart {
+  height: 50px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  border-radius: 25px !important;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
+  border: none !important;
+  box-shadow: var(--shadow-green) !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.btn-add-cart:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 32px rgba(0, 185, 107, 0.35) !important;
+}
+
+.btn-add-cart:disabled {
+  background: #d9d9d9 !important;
+  box-shadow: none !important;
+}
+
+/* ── Responsive ── */
+@media (max-width: 767px) {
+  .tour-detail-title {
+    font-size: 22px !important;
+  }
+
+  .total-preview-card {
+    padding: 18px 20px !important;
+    border-radius: 14px !important;
+  }
+
+  .total-preview-card .total-price {
+    font-size: 24px;
+  }
+
+  .total-preview-card .btn-add-cart {
+    height: 44px !important;
+    padding: 0 18px !important;
+    font-size: 13px !important;
+    border-radius: 12px !important;
+  }
+
+  .traveler-selector-card {
+    border-radius: 16px !important;
+  }
+
+  .traveler-row {
+    padding: 12px 14px !important;
+  }
+
+  .info-card .ant-card-body {
+    padding: 18px !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .total-preview-card > div {
+    flex-direction: column !important;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .total-preview-card .btn-add-cart {
+    width: 100% !important;
+  }
+
+  .traveler-row .ant-input-number {
+    width: 80px !important;
+  }
 }

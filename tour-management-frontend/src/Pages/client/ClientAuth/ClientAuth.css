@@ -1,58 +1,53 @@
 /* ==========================================
-   Trang Đăng nhập / Đăng ký - Client
-   ========================================== */
+   CLIENT AUTH — Login / Register page
+   Premium glassmorphism card
+========================================== */
 
 .client-auth-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #e0f2f1 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #0a1628 0%, #0d3326 50%, #00b96b 100%);
   position: relative;
   overflow: hidden;
   padding: 24px;
 }
 
-/* Hình tròn trang trí nền */
+/* Floating decoration circles */
 .client-auth-circle {
   position: absolute;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(0, 185, 107, 0.1), rgba(0, 185, 107, 0.05));
-  backdrop-filter: blur(40px);
-  animation: floatCircle 10s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(0,185,107,0.12), transparent 70%);
+  animation: floatCircle 12s ease-in-out infinite;
   z-index: 0;
 }
 .client-auth-circle--1 {
-  width: 500px;
-  height: 500px;
-  top: -150px;
-  left: -150px;
-  animation-delay: 0s;
+  width: 550px; height: 550px;
+  top: -180px; left: -180px;
 }
 .client-auth-circle--2 {
-  width: 400px;
-  height: 400px;
-  bottom: -100px;
-  right: -100px;
-  animation-delay: -5s;
+  width: 420px; height: 420px;
+  bottom: -120px; right: -120px;
+  animation-delay: -6s;
 }
 
 @keyframes floatCircle {
-  0%, 100% { transform: translate(0px, 0px) scale(1); }
-  50% { transform: translate(30px, -30px) scale(1.05); }
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(30px, -30px) scale(1.06); }
 }
 
-/* Card trắng ở giữa */
+/* Glassmorphism card */
 .client-auth-card {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.5);
   border-radius: 24px;
   padding: 48px 40px 40px;
   width: 100%;
   max-width: 460px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 32px 64px rgba(0,0,0,0.18);
   position: relative;
   z-index: 1;
   animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -70,77 +65,78 @@
 }
 
 .client-auth-logo-icon {
-  width: 72px;
-  height: 72px;
-  background: linear-gradient(135deg, #00b96b, #00965e);
+  width: 72px; height: 72px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 16px;
   font-size: 32px;
-  color: white;
-  box-shadow: 0 10px 25px rgba(0, 185, 107, 0.3);
+  color: #fff;
+  box-shadow: 0 10px 28px rgba(0,185,107,0.35);
 }
 
 .client-auth-title {
+  font-family: 'Playfair Display', serif !important;
   margin: 0 !important;
-  color: #1f2937 !important;
+  color: var(--dark) !important;
   font-weight: 800 !important;
   letter-spacing: -0.5px;
 }
 
 .client-auth-subtitle {
-  color: #6b7280;
+  color: var(--text-secondary);
   font-size: 15px;
   font-weight: 500;
 }
 
-/* Input */
+/* Inputs */
 .client-input .ant-input,
 .client-input {
   border-radius: 12px !important;
   height: 52px;
-  background-color: #f9fafb !important;
-  border: 1px solid #e5e7eb !important;
+  background-color: #f8faf9 !important;
+  border: 1.5px solid var(--border) !important;
   font-size: 15px !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s;
 }
 .client-input:hover {
-  border-color: #d1d5db !important;
+  border-color: #c8d5d0 !important;
 }
 .client-input:focus-within {
-  background-color: #ffffff !important;
-  border-color: #00b96b !important;
-  box-shadow: 0 0 0 4px rgba(0, 185, 107, 0.1) !important;
+  background-color: #fff !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 4px rgba(0,185,107,0.08) !important;
 }
 
 .input-icon {
-  color: #9ca3af;
+  color: var(--text-muted);
   font-size: 18px;
   margin-right: 8px;
+  transition: color 0.2s;
 }
 .client-input:focus-within .input-icon {
-  color: #00b96b;
+  color: var(--primary);
 }
 
-/* Nút đăng nhập / đăng ký */
+/* Submit button */
 .client-auth-btn {
   height: 54px !important;
-  border-radius: 14px !important;
+  border-radius: 27px !important;
   font-size: 16px !important;
   font-weight: 700 !important;
-  background: linear-gradient(135deg, #00b96b, #00965e) !important;
-  color: white !important;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
+  color: #fff !important;
   border: none !important;
-  box-shadow: 0 8px 20px rgba(0, 185, 107, 0.25) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  margin-top: 12px;
+  box-shadow: var(--shadow-green) !important;
+  transition: all 0.3s !important;
+  margin-top: 8px;
 }
 .client-auth-btn:hover {
   transform: translateY(-2px) !important;
-  box-shadow: 0 12px 28px rgba(0, 185, 107, 0.35) !important;
-  filter: brightness(1.05);
+  box-shadow: 0 14px 32px rgba(0,185,107,0.35) !important;
+  filter: brightness(1.04);
 }
 .client-auth-btn:active {
   transform: translateY(1px) !important;
@@ -148,33 +144,28 @@
 
 /* Tabs */
 .client-auth-tabs .ant-tabs-nav {
-  margin-bottom: 32px !important;
+  margin-bottom: 28px !important;
 }
 .client-auth-tabs .ant-tabs-tab-btn {
   font-size: 16px;
   font-weight: 600;
-  color: #6b7280;
-  transition: color 0.3s;
+  color: var(--text-secondary);
+  transition: color 0.2s;
 }
 .client-auth-tabs .ant-tabs-tab:hover .ant-tabs-tab-btn {
-  color: #374151;
+  color: var(--text-primary);
 }
 .client-auth-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-  color: #00b96b !important;
+  color: var(--primary) !important;
 }
 .client-auth-tabs .ant-tabs-ink-bar {
-  background: #00b96b !important;
+  background: var(--primary) !important;
   height: 3px !important;
   border-radius: 3px;
 }
 
-/* Link quay về */
-.client-auth-back-link {
-  color: #6b7280;
-  font-size: 14px;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-.client-auth-back-link:hover {
-  color: #00b96b;
+/* Responsive */
+@media (max-width: 480px) {
+  .client-auth-card { padding: 36px 24px 28px; }
+  .client-auth-btn  { height: 48px !important; border-radius: 24px !important; }
 }

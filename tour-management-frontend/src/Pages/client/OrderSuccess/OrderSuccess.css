@@ -1,1 +1,71 @@
-/* OrderSuccess CSS */
+/* ==========================================
+   ORDER SUCCESS PAGE — Celebration styles
+========================================== */
+
+.order-success-page .ant-result {
+  padding: 32px 24px 20px !important;
+}
+
+.order-success-page .ant-result-icon {
+  margin-bottom: 16px !important;
+}
+
+.order-success-page .ant-result-title {
+  font-size: 26px !important;
+  font-weight: 800 !important;
+  color: var(--dark) !important;
+}
+
+.order-success-page .ant-result-subtitle {
+  font-size: 15px !important;
+  color: var(--text-secondary) !important;
+}
+
+/* Customer info card */
+.order-success-page .order-info-card {
+  border-radius: var(--radius-md) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.order-success-page .order-info-card .ant-card-head {
+  background: linear-gradient(135deg, #f0fff4, #f7faf8) !important;
+  border-bottom: 1px solid rgba(0,185,107,0.12) !important;
+  font-weight: 700;
+}
+
+/* Tour list card */
+.order-success-page .order-items-card {
+  border-radius: var(--radius-md) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.order-success-page .order-items-card .ant-card-head {
+  background: var(--bg) !important;
+}
+
+.order-success-page .ant-table-thead > tr > th {
+  background: var(--primary-light) !important;
+  font-weight: 700 !important;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Home button */
+.order-success-page .btn-home {
+  height: 44px !important;
+  border-radius: 22px !important;
+  font-weight: 600 !important;
+  padding: 0 28px !important;
+}
+
+/* Tour image */
+.order-success-page .order-tour-img {
+  width: 70px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}

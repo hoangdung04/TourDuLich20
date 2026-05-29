@@ -1,1 +1,381 @@
-/* Cart Page CSS */
+/* ==========================================
+   CART PAGE — Shopping cart travel styles
+========================================== */
+
+/* Cart table card */
+.cart-table-card {
+  border-radius: var(--radius-md) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-sm) !important;
+  overflow: hidden;
+}
+
+.cart-table-card .ant-table-thead > tr > th {
+  background: var(--primary-light) !important;
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Cart total bar */
+.cart-total-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 0 4px;
+}
+
+.cart-total-label {
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.cart-total-value {
+  color: #f5222d !important;
+  font-weight: 800 !important;
+  font-size: 24px !important;
+}
+
+/* Customer form card */
+.cart-form-card {
+  border-radius: var(--radius-md) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.cart-form-card .ant-card-head {
+  background: linear-gradient(135deg, #f0fff4, #f7faf8) !important;
+  border-bottom: 1px solid rgba(0,185,107,0.12) !important;
+}
+
+/* Submit order button */
+.btn-order {
+  height: 50px !important;
+  border-radius: 25px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
+  border: none !important;
+  box-shadow: var(--shadow-green) !important;
+  transition: all 0.25s !important;
+}
+.btn-order:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 32px rgba(0,185,107,0.35) !important;
+}
+
+/* Empty cart */
+.cart-empty-icon {
+  font-size: 72px !important;
+  color: var(--text-muted) !important;
+  opacity: 0.5;
+}
+
+/* Tour image in cart */
+.cart-tour-img {
+  width: 72px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+/* Delete button */
+.cart-delete-btn {
+  color: var(--text-muted) !important;
+  transition: color 0.2s !important;
+}
+.cart-delete-btn:hover {
+  color: #f5222d !important;
+}
+
+/* ==========================================
+   PAYMENT METHOD SELECTION
+========================================== */
+
+.payment-method-group {
+  width: 100%;
+}
+
+.payment-method-group .ant-radio-wrapper {
+  display: none; /* Hide default radio in wrapper, we use custom cards */
+}
+
+.payment-method-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.payment-method-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-method-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: transparent;
+  transition: background 0.3s;
+  border-radius: 4px 0 0 4px;
+}
+
+.payment-method-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 4px 16px rgba(0, 185, 107, 0.12);
+  transform: translateY(-1px);
+}
+
+.payment-method-card.active {
+  border-color: var(--primary);
+  background: linear-gradient(135deg, #f0fff4, #f7faf8);
+  box-shadow: 0 4px 20px rgba(0, 185, 107, 0.15);
+}
+
+.payment-method-card.active::before {
+  background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+}
+
+.payment-method-card .ant-radio-wrapper {
+  display: flex !important;
+  margin-right: 0;
+}
+
+.payment-method-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+}
+
+.payment-method-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.payment-method-card:hover .payment-method-icon {
+  transform: scale(1.1);
+}
+
+.payment-method-icon.bank {
+  background: linear-gradient(135deg, #e6f7ff, #bae7ff);
+  color: #1890ff;
+}
+
+.payment-method-icon.cash {
+  background: linear-gradient(135deg, #f6ffed, #d9f7be);
+  color: #52c41a;
+}
+
+.payment-method-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.payment-method-desc {
+  font-size: 12px !important;
+}
+
+.payment-method-tag {
+  flex-shrink: 0;
+}
+
+/* ==========================================
+   QR CODE PAYMENT MODAL
+========================================== */
+
+.qr-payment-modal .ant-modal-content {
+  padding: 0 !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden;
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.15) !important;
+}
+
+.qr-modal-content {
+  overflow: hidden;
+}
+
+.qr-modal-header {
+  background: linear-gradient(135deg, #1a73e8, #0d47a1);
+  padding: 28px 32px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.qr-modal-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: #fff;
+  margin-bottom: 8px;
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  animation: pulse-icon 2s ease-in-out infinite;
+}
+
+@keyframes pulse-icon {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0.3); }
+  50% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(255,255,255,0); }
+}
+
+.qr-modal-body {
+  padding: 24px 32px 28px;
+}
+
+/* QR Code */
+.qr-code-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.qr-code-image {
+  width: 220px;
+  height: auto;
+  border-radius: var(--radius-md);
+  border: 3px solid var(--border);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s;
+}
+
+.qr-code-image:hover {
+  transform: scale(1.03);
+}
+
+.qr-fallback {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 40px;
+  background: #fafafa;
+  border-radius: var(--radius-md);
+  border: 2px dashed var(--border);
+}
+
+/* Bank info */
+.bank-info-section {
+  background: #fafbfc;
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+}
+
+.bank-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.bank-info-row + .bank-info-row {
+  border-top: 1px dashed rgba(0, 0, 0, 0.06);
+}
+
+.bank-info-row.total-row {
+  border-top: none;
+  padding-top: 4px;
+}
+
+.copy-btn {
+  color: var(--primary) !important;
+  font-size: 14px !important;
+}
+.copy-btn:hover {
+  color: var(--primary-dark) !important;
+  background: var(--primary-light) !important;
+}
+
+/* Confirm transfer button */
+.btn-confirm-transfer {
+  height: 50px !important;
+  border-radius: 25px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  background: linear-gradient(135deg, #52c41a, #389e0d) !important;
+  border: none !important;
+  box-shadow: 0 8px 24px rgba(82, 196, 26, 0.25) !important;
+  transition: all 0.25s !important;
+}
+.btn-confirm-transfer:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 32px rgba(82, 196, 26, 0.35) !important;
+}
+
+.qr-modal-actions {
+  margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .payment-method-content {
+    flex-wrap: wrap;
+  }
+  .payment-method-tag {
+    display: none;
+  }
+  .qr-modal-body {
+    padding: 16px 20px 24px;
+  }
+  .qr-code-image {
+    width: 180px;
+  }
+  .qr-modal-header {
+    padding: 20px 20px 18px;
+  }
+}
+
+/* Cart item details panel */
+.cart-item-details-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 6px 0;
+  max-width: 260px;
+}
+
+.cart-detail-subrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.subrow-label {
+  color: #4b5563;
+  font-size: 12px;
+  font-weight: 500;
+}

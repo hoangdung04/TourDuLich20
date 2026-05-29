@@ -1,0 +1,60 @@
+/* ==========================================
+   ORDER HISTORY PAGE
+========================================== */
+.order-history-page {
+  min-height: 75vh;
+}
+
+.order-history-card {
+  border-radius: var(--radius-md) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-sm) !important;
+  overflow: hidden;
+}
+
+.order-history-card .ant-table-thead > tr > th {
+  background: var(--primary-light) !important;
+  font-weight: 700 !important;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-primary) !important;
+}
+
+.order-history-card .ant-table-tbody > tr:hover > td {
+  background: #f0fdf4 !important;
+}
+
+/* Empty state */
+.history-empty-icon {
+  font-size: 64px !important;
+  color: var(--primary) !important;
+  opacity: 0.35;
+}
+
+/* Nút "Thanh toán ngay" */
+.btn-pay-now {
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+  background: linear-gradient(135deg, #fa8c16, #d46b08) !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(250, 140, 22, 0.25) !important;
+  transition: all 0.25s !important;
+}
+.btn-pay-now:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 16px rgba(250, 140, 22, 0.35) !important;
+  background: linear-gradient(135deg, #d46b08, #ad4e00) !important;
+}
+
+/* Animation nhấp nháy nhẹ cho nút thanh toán để thu hút chú ý */
+@keyframes pulse-pay {
+  0%, 100% { box-shadow: 0 4px 12px rgba(250, 140, 22, 0.25); }
+  50% { box-shadow: 0 4px 20px rgba(250, 140, 22, 0.45); }
+}
+.btn-pay-now {
+  animation: pulse-pay 2s ease-in-out infinite;
+}
+.btn-pay-now:hover {
+  animation: none;
+}

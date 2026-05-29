@@ -1,67 +1,127 @@
-/* Global styles - Tour Management */
-*, *::before, *::after {
-  box-sizing: border-box;
+/* ==========================================================
+   GLOBAL STYLES — Tour Management Client
+   Font: Inter (Google Fonts) — Travel premium theme
+   Color system:
+     Primary:   #00b96b (Emerald Green)
+     Secondary: #ff6b35 (Sunset Orange — accent)
+     Dark:      #0f1923 (Deep Navy)
+     Bg light:  #f7faf8
+========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap');
+
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --primary:       #00b96b;
+  --primary-dark:  #009654;
+  --primary-light: #e6f9f1;
+  --accent:        #ff6b35;
+  --accent-light:  #fff3ee;
+  --dark:          #0f1923;
+  --dark-2:        #1e2d3d;
+  --text-primary:  #1a2332;
+  --text-secondary:#5a6a7a;
+  --text-muted:    #8fa0b2;
+  --border:        #e4ecf0;
+  --bg:            #f7faf8;
+  --bg-card:       #ffffff;
+  --radius-sm:     8px;
+  --radius-md:     14px;
+  --radius-lg:     20px;
+  --shadow-sm:     0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md:     0 8px 24px rgba(0,0,0,0.09);
+  --shadow-lg:     0 20px 48px rgba(0,0,0,0.12);
+  --shadow-green:  0 8px 24px rgba(0,185,107,0.2);
 }
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f5f6fa;
-  color: #1a1a2e;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
 }
 
-#root {
-  min-height: 100vh;
+#root { min-height: 100vh; }
+
+/* ── Ant Design global overrides ── */
+.ant-layout { background: var(--bg) !important; }
+.ant-card { border-radius: var(--radius-md) !important; border-color: var(--border) !important; }
+.ant-btn-primary:not(.ant-btn-background-ghost) {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: #fff !important;
+  border-radius: var(--radius-sm) !important;
+  font-weight: 600 !important;
+}
+.ant-btn-primary:not(.ant-btn-background-ghost):hover {
+  background: var(--primary-dark) !important;
+  border-color: var(--primary-dark) !important;
 }
 
-/* Swiper customization for TourDetail */
+/* Fix cho ghost button (như nút Sửa, Chi tiết) bị bôi xanh */
+.ant-btn-primary.ant-btn-background-ghost {
+  color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  background: transparent !important;
+  font-weight: 600 !important;
+}
+.ant-btn-primary.ant-btn-background-ghost:hover {
+  color: var(--primary-dark) !important;
+  border-color: var(--primary-dark) !important;
+  background: rgba(0, 185, 107, 0.08) !important;
+}
+.ant-tag { border-radius: 6px !important; font-weight: 500 !important; }
+.ant-breadcrumb { font-size: 14px !important; }
+.ant-breadcrumb a { color: var(--primary) !important; }
+.ant-pagination-item-active {
+  border-color: var(--primary) !important;
+  background: var(--primary) !important;
+}
+.ant-pagination-item-active a { color: #fff !important; }
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector,
+.ant-input:hover,
+.ant-input-number:hover .ant-input-number-input {
+  border-color: var(--primary) !important;
+}
+.ant-input:focus,
+.ant-input-focused {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 2px rgba(0,185,107,0.12) !important;
+}
+.ant-select-focused .ant-select-selector {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 2px rgba(0,185,107,0.12) !important;
+}
+
+/* ── Swiper (TourDetail) ── */
 .swiper-images-main {
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
+  box-shadow: var(--shadow-md);
 }
-
-.swiper-images-main .inner-image {
-  aspect-ratio: 4/3;
-}
-
-.swiper-images-main .inner-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
+.swiper-images-main .inner-image { aspect-ratio: 4/3; }
+.swiper-images-main .inner-image img { width: 100%; height: 100%; object-fit: cover; }
 .swiper-button-next,
 .swiper-button-prev {
-  color: #ffffff;
-  background: rgba(0,0,0,0.35);
-  width: 36px;
-  height: 36px;
+  color: #fff;
+  background: rgba(0,0,0,0.4);
+  width: 40px; height: 40px;
   border-radius: 50%;
+  backdrop-filter: blur(4px);
 }
-
 .swiper-button-next::after,
-.swiper-button-prev::after {
-  font-size: 14px;
-  font-weight: 700;
-}
+.swiper-button-prev::after { font-size: 13px; font-weight: 700; }
 
-/* Ant Design overrides */
-.ant-layout {
-  background: #f5f6fa;
-}
+/* ── Rich HTML (tour detail body) ── */
+.rich-content { line-height: 1.8; color: var(--text-primary); }
+.rich-content img { max-width: 100%; height: auto; border-radius: var(--radius-md); }
+.rich-content h2, .rich-content h3 { color: var(--dark); }
+.rich-content ul { padding-left: 20px; }
 
-.ant-card {
-  border-radius: 12px !important;
-}
-
-.ant-btn-primary {
-  border-radius: 8px;
-}
-
-/* Rich HTML content from backend (tour detail) */
-.rich-content img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
+/* ── Utility ── */
+.text-primary { color: var(--primary) !important; }
+.text-accent  { color: var(--accent)  !important; }

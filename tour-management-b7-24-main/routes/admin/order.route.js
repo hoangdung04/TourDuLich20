@@ -7,7 +7,16 @@ const router = Router();
 
 router.use(requireAuth);
 
-router.get("/", controller.index);
-router.patch("/:id/status", controller.updateStatus);
+// [GET] /api/admin/orders  – Danh sách đơn hàng
+router.get("/", checkPermission("orders_view"), controller.index);
+
+// [GET] /api/admin/orders/:id  – Chi tiết đơn hàng
+router.get("/:id", checkPermission("orders_view"), controller.detail);
+
+// [PATCH] /api/admin/orders/:id/status  – Cập nhật trạng thái đơn hàng
+router.patch("/:id/status", checkPermission("orders_edit"), controller.updateStatus);
+
+// [DELETE] /api/admin/orders/:id  – Xóa đơn hàng (soft delete)
+router.delete("/:id", checkPermission("orders_delete"), controller.deletePatch);
 
 export const orderRoutes = router;

@@ -7,6 +7,8 @@ import { roleRoutes } from "./role.route.js";
 import { accountRoutes } from "./account.route.js";
 import { orderRoutes } from "./order.route.js";
 import { dashboardRoutes } from "./dashboard.route.js";
+import { chatRoutes } from "./chat.route.js";
+import { articleRoutes } from "./article.route.js";
 
 const router = Router();
 
@@ -21,5 +23,7 @@ router.use("/upload", uploadRoutes);
 router.use("/roles", roleRoutes);
 router.use("/accounts", accountRoutes);
 router.use("/orders", orderRoutes);
+router.use("/chat", chatRoutes);
+router.use("/articles", articleRoutes);
 
 export const adminRoutes = router;
