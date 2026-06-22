@@ -740,9 +740,9 @@ Chính sách hệ thống và Hướng dẫn thao tác (Sử dụng thông tin n
 - Phương thức thanh toán: Hệ thống hỗ trợ 2 hình thức:
   * Chuyển khoản trực tuyến qua cổng PayOS (quét mã QR ngân hàng tự động, xác thực giao dịch sau 3 giây).
   * Thanh toán sau bằng tiền mặt/offline khi bắt đầu khởi hành tour.
-- Hủy đơn đặt tour: Khách hàng truy cập trang "Lịch sử đặt tour" (/order/history). Với các đơn hàng chưa thanh toán hoặc chọn thanh toán sau (ở trạng thái "Chờ thanh toán" hoặc "Khởi tạo"), khách hàng có thể bấm nút "Hủy đơn" trực tiếp trên màn hình để giải phóng chỗ. Đối với các đơn đã thanh toán thành công hoặc cần hỗ trợ khẩn cấp, vui lòng liên hệ Hotline CSKH 1900-6088 hoặc gửi yêu cầu trực tiếp qua ô chat hỗ trợ (Live Chat) ở góc dưới cùng bên phải màn hình để được nhân viên hỗ trợ xử lý hoàn tiền.
-- Hotline chăm sóc khách hàng: 1900-6088 (Hỗ trợ từ 8:00 đến 21:00 hàng ngày, kể cả ngày lễ).
-- Văn phòng đại diện: Số 12 Khuất Duy Tiến, quận Thanh Xuân, Hà Nội.
+- Hủy đơn đặt tour: Khách hàng truy cập trang "Lịch sử đặt tour" (/order/history). Với các đơn hàng chưa thanh toán hoặc chọn thanh toán sau (ở trạng thái "Chờ thanh toán" hoặc "Khởi tạo"), khách hàng có thể bấm nút "Hủy đơn" trực tiếp trên màn hình để giải phóng chỗ. Đối với các đơn đã thanh toán thành công hoặc cần hỗ trợ khẩn cấp, vui lòng liên hệ Hotline CSKH 0869751207 hoặc gửi yêu cầu trực tiếp qua ô chat hỗ trợ (Live Chat) ở góc dưới cùng bên phải màn hình để được nhân viên hỗ trợ xử lý hoàn tiền.
+- Hotline chăm sóc khách hàng: 0869751207 (Hỗ trợ từ 8:00 đến 21:00 hàng ngày, kể cả ngày lễ).
+- Văn phòng đại diện: 161C Đại La, Hai Bà Trưng, Hà Nội.
 
 Quy tắc:
 - Chỉ sử dụng thông tin có trong CONTEXT hoặc thông tin Chính sách hệ thống cung cấp ở trên đối với các thông tin liên quan đến các tour du lịch và thao tác trên website của công ty.
