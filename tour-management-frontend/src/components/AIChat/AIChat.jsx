@@ -15,6 +15,7 @@ const BookingFormWidget = ({ bookingForm, onSuccess }) => {
   // States for input fields
   const [fullName, setFullName] = useState(user?.fullName || "");
   const [phone, setPhone] = useState(user?.phone || "");
+  const [email, setEmail] = useState(user?.email || "");
   const [note, setNote] = useState("");
   
   // States for counters
@@ -63,6 +64,14 @@ const BookingFormWidget = ({ bookingForm, onSuccess }) => {
       antdMessage.error("Số điện thoại không hợp lệ!");
       return;
     }
+    if (!email.trim()) {
+      antdMessage.error("Vui lòng nhập email!");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      antdMessage.error("Email không hợp lệ!");
+      return;
+    }
 
     setSubmitting(true);
     try {
@@ -70,7 +79,7 @@ const BookingFormWidget = ({ bookingForm, onSuccess }) => {
         info: {
           fullName: fullName.trim(),
           phone: phone.trim(),
-          email: user?.email || "",
+          email: email.trim(),
           note: note.trim(),
           account_id: user?.id || null,
         },
@@ -177,6 +186,17 @@ const BookingFormWidget = ({ bookingForm, onSuccess }) => {
             placeholder="0987654321" 
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
+            required
+            disabled={submitting}
+          />
+        </div>
+        <div className="ai-booking-form-field">
+          <label>Email *</label>
+          <input 
+            type="email" 
+            placeholder="example@gmail.com" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
             disabled={submitting}
           />
